@@ -1,6 +1,5 @@
 package com.attilaslearning.jobportal.entity;
 
-
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -10,37 +9,37 @@ import java.util.List;
 public class UsersType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int usersTypeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userTypeId;
 
-    private String usersTypeName;
+    private String userTypeName;
 
-    @OneToMany(targetEntity = Users.class, mappedBy = "usersTypeId", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Users.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)
     private List<Users> users;
 
     public UsersType() {
     }
 
-    public UsersType(int usersTypeId, String usersTypeName, List<Users> users) {
-        this.usersTypeId = usersTypeId;
-        this.usersTypeName = usersTypeName;
+    public UsersType(int userTypeId, String userTypeName, List<Users> users) {
+        this.userTypeId = userTypeId;
+        this.userTypeName = userTypeName;
         this.users = users;
     }
 
-    public int getUsersTypeId() {
-        return usersTypeId;
+    public int getUserTypeId() {
+        return userTypeId;
     }
 
-    public void setUsersTypeId(int usersTypeId) {
-        this.usersTypeId = usersTypeId;
+    public void setUserTypeId(int userTypeId) {
+        this.userTypeId = userTypeId;
     }
 
-    public String getUsersTypeName() {
-        return usersTypeName;
+    public String getUserTypeName() {
+        return userTypeName;
     }
 
-    public void setUsersTypeName(String usersTypeName) {
-        this.usersTypeName = usersTypeName;
+    public void setUserTypeName(String userTypeName) {
+        this.userTypeName = userTypeName;
     }
 
     public List<Users> getUsers() {
@@ -54,8 +53,9 @@ public class UsersType {
     @Override
     public String toString() {
         return "UsersType{" +
-                "usersTypeId=" + usersTypeId +
-                ", usersTypeName='" + usersTypeName + '\'' +
+                "userTypeId=" + userTypeId +
+                ", userTypeName='" + userTypeName + '\'' +
                 '}';
     }
+
 }

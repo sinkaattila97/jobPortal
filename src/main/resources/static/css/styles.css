@@ -53,10 +53,10 @@ a.primary {
   overflow: hidden;
   background-image: linear-gradient(
       to right,
-      rgba(0, 34, 68, 0.8),
-      rgba(0, 34, 68, 0.8)
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.8)
     ),
-    url('../assets/city-skyline.png');
+    url('../assets/fdistrict.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -95,7 +95,7 @@ a.primary {
 .logo_right .Recruiter_login_btn {
   padding: 10px;
   border-radius: 0.45rem;
-  background-color: #002244;
+  background-color: #3e4043;
 }
 label > a {
   text-decoration: none;
@@ -176,7 +176,7 @@ label > a :hover {
 /* Navbar */
 header.navbar {
   height: 80px;
-  background-color: #002244;
+  background-color: #7c8691;
 }
 header .navbar-nav {
   padding: 9px;
@@ -289,10 +289,10 @@ label.large-label {
   overflow: hidden;
   background-image: linear-gradient(
       to right,
-      rgba(0, 34, 68, 0.5),
-      rgba(0, 34, 68, 0.5)
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
     ),
-    url('../assets/coffee-mug.jpg');
+    url('../assets/mountain.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

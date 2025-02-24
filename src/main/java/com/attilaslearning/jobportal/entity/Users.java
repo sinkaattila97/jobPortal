@@ -7,11 +7,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Entity
-@Table
+@Table(name = "users")
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
     @Column(unique = true)
@@ -26,19 +26,19 @@ public class Users {
     private Date registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usersTypeId", referencedColumnName = "usersTypeId")
-    private UsersType usersTypeId;
+    @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
+    private UsersType userTypeId;
 
     public Users() {
     }
 
-    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType usersTypeId) {
+    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType userTypeId) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.isActive = isActive;
         this.registrationDate = registrationDate;
-        this.usersTypeId = usersTypeId;
+        this.userTypeId = userTypeId;
     }
 
     public int getUserId() {
@@ -81,12 +81,12 @@ public class Users {
         this.registrationDate = registrationDate;
     }
 
-    public UsersType getUsersTypeId() {
-        return usersTypeId;
+    public UsersType getUserTypeId() {
+        return userTypeId;
     }
 
-    public void setUsersTypeId(UsersType usersTypeId) {
-        this.usersTypeId = usersTypeId;
+    public void setUserTypeId(UsersType userTypeId) {
+        this.userTypeId = userTypeId;
     }
 
     @Override
@@ -97,7 +97,7 @@ public class Users {
                 ", password='" + password + '\'' +
                 ", isActive=" + isActive +
                 ", registrationDate=" + registrationDate +
-                ", usersTypeId=" + usersTypeId +
+                ", userTypeId=" + userTypeId +
                 '}';
     }
 }
