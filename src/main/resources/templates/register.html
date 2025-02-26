@@ -50,6 +50,17 @@
                                 method="post"
                         >
                             <div class="box-body bozero mx2p">
+                                <!-- Displaying the error message -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div th:if="${error}" class="alert alert-danger">
+                                                <p th:text="${error}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END Displaying the error message -->
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">

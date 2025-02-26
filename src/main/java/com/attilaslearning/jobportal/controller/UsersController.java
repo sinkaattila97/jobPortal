@@ -20,7 +20,7 @@ public class UsersController {
     private final UsersTypeService usersTypeService;
     private final UsersService usersService;
 
-    @Autowired
+    @Autowired //Autowired is used to inject the dependency
     public UsersController(UsersTypeService usersTypeService, UsersService usersService) {
         this.usersTypeService = usersTypeService;
         this.usersService = usersService;
@@ -46,5 +46,10 @@ public class UsersController {
         }
         usersService.addNew(users);
         return "redirect:/dashboard/";
+    }
+
+    @GetMapping("/dashboard/")
+    public String dashboard(Model model) {
+        return "dashboard";
     }
 }

@@ -38,5 +38,11 @@
 
 ### Development Road map:
 1. User Registration -> Login/Logout
+   2. Setup the project
+   3. Create project template files(HTML, JS, CSS)
+   4. Database Entities for Users and UserTypes
+   5. User Registration: Repositories and Controllers
+   6. Create profiles for Recruiter and JobSeeker
+   7. Add support for Skills to JobSeekers
 2. Recruiter Profile -> Recruiter Dashboard -> Recruiter New Job
 3. Candidate Profile -> Candidate Dashboard -> Candidate Apply

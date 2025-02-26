@@ -32,7 +32,7 @@ public class UsersService {
         Users savedUser = usersRepository.save(users);
         int userTypeId = users.getUserTypeId().getUserTypeId();
 
-        if (userTypeId == 1) {
+        if (userTypeId == 1) {//1 is for recruiter
             recruiterProfileRepository.save(new RecruiterProfile(savedUser));
         }
         else {
