@@ -1,7 +1,12 @@
 package com.attilaslearning.jobportal.controller;
 
 import com.attilaslearning.jobportal.services.UsersService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.Model;
 import com.attilaslearning.jobportal.entity.Users;
 import com.attilaslearning.jobportal.entity.UsersType;
@@ -48,8 +53,20 @@ public class UsersController {
         return "redirect:/dashboard/";
     }
 
-    @GetMapping("/dashboard/")
-    public String dashboard(Model model) {
-        return "dashboard";
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null) {
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
+
+        return "redirect:/";
     }
 }
