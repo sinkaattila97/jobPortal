@@ -176,7 +176,7 @@ label > a :hover {
 /* Navbar */
 header.navbar {
   height: 80px;
-  background-color: #7c8691;
+  background-color: #252729;
 }
 header .navbar-nav {
   padding: 9px;
@@ -213,7 +213,7 @@ section.section {
 
 .sidenav {
   overflow: auto;
-  background-color: #002244;
+  background-color: #262626;
   padding-top: 20px;
   color: white;
   width: 300px;

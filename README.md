@@ -44,5 +44,9 @@
    5. User Registration: Repositories and Controllers
    6. Create profiles for Recruiter and JobSeeker
    7. Add support for Skills to JobSeekers
-2. Recruiter Profile -> Recruiter Dashboard -> Recruiter New Job
+2. Recruiter Profile 
+    1. Create RecruiterProfile  - controller and service
+    2. Add support for file upload of recruiter profile image
+    3. Update dashboard to display recruiter profile image
+3. -> Recruiter Dashboard -> Recruiter New Job
 3. Candidate Profile -> Candidate Dashboard -> Candidate Apply
