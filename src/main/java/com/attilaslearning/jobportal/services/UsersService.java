@@ -52,29 +52,36 @@ public class UsersService {
         return savedUser;
     }
 
-    public Optional<Users> getUserByEmail(String email) {
-        return usersRepository.findByEmail(email);
-    }
-
     public Object getCurrentUserProfile() {
-        Authentication authentication = SecurityContextHolder.getContext()
-                .getAuthentication();
 
-        if (!(authentication instanceof AnonymousAuthenticationToken)){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = authentication.getName();
-            Users users = usersRepository.findByEmail(username).orElseThrow(() -> new
-                    UsernameNotFoundException("User " + usersRepository.findByEmail(username) + "could not be found"));
-
+            Users users = usersRepository.findByEmail(username).orElseThrow(()-> new UsernameNotFoundException("Could not found " + "user"));
             int userId = users.getUserId();
-            if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("Recruiter"))){
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("Recruiter"))) {
                 RecruiterProfile recruiterProfile = recruiterProfileRepository.findById(userId).orElse(new RecruiterProfile());
                 return recruiterProfile;
             } else {
-                jobSeekerProfileRepository.findById(userId).orElse(new JobSeekerProfile());
-                return jobSeekerProfileRepository;
+                JobSeekerProfile jobSeekerProfile = jobSeekerProfileRepository.findById(userId).orElse(new JobSeekerProfile());
+                return jobSeekerProfile;
             }
         }
 
         return null;
     }
+
+    public Optional<Users> getUserByEmail(String email) {
+        return usersRepository.findByEmail(email);
+    }
+    
 }
+
+
+
+
+
+
+
+

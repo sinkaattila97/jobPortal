@@ -12,11 +12,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import javax.swing.*;
+
 @Configuration
 public class WebSecurityConfig {
 
-    private final CustomUserDetailsService customUserDetailService;
+    private final CustomUserDetailsService customUserDetailsService;
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    public WebSecurityConfig(CustomUserDetailsService customUserDetailsService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
+        this.customUserDetailsService = customUserDetailsService;
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+    }
 
     private final String[] publicUrl = {"/",
             "/global-search/**",
@@ -33,49 +40,38 @@ public class WebSecurityConfig {
             "/*.js.map",
             "/fonts**", "/favicon.ico", "/resources/**", "/error"};
 
-    @Autowired
-    public WebSecurityConfig(CustomUserDetailsService userDetailService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
-        this.customUserDetailService = userDetailService;
-        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
-    }
-
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> {        //a list of public URLs which does not require for the user to login
-            auth.requestMatchers(publicUrl).permitAll();                          //so anyone can have access to these URLs without logging in
-            auth.anyRequest().authenticated();                                    //all other URLs require the user to be logged in
-
-        });
 
         http.authenticationProvider(authenticationProvider());
 
-        http.formLogin(form -> form.loginPage("/login").permitAll() //we are telling Spring to use our custom login page
-                .successHandler(customAuthenticationSuccessHandler)) //we are telling Spring to use our custom login page
-                .logout( logout -> {
-                        logout.logoutUrl("/logout");
-                        logout.logoutSuccessUrl("/");
-                        logout.invalidateHttpSession(true);
-                        logout.deleteCookies("JSESSIONID");}).
-                cors(Customizer.withDefaults()).csrf(csrf -> csrf.disable());
+        http.authorizeHttpRequests(auth -> {
+            auth.requestMatchers(publicUrl).permitAll();
+            auth.anyRequest().authenticated();
+        });
 
-
-
+        http.formLogin(form->form.loginPage("/login").permitAll()
+                .successHandler(customAuthenticationSuccessHandler))
+                .logout(logout-> {
+                    logout.logoutUrl("/logout");
+                    logout.logoutSuccessUrl("/");
+                }).cors(Customizer.withDefaults())
+                .csrf(csrf->csrf.disable());
 
         return http.build();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() { //we use this to tell Spring how to find the users and how to authenticate passwords
+    public AuthenticationProvider authenticationProvider() {
+
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder());
-        authenticationProvider.setUserDetailsService(customUserDetailService); //how we get the users
-
+        authenticationProvider.setUserDetailsService(customUserDetailsService);
         return authenticationProvider;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() { //this tells Spring how we want to encode our passwords
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-
     }
 }
