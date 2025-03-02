@@ -48,5 +48,9 @@
     1. Create RecruiterProfile  - controller and service
     2. Add support for file upload of recruiter profile image
     3. Update dashboard to display recruiter profile image
-3. -> Recruiter Dashboard -> Recruiter New Job
+3. Recruiter New Job
+   4. Create JPA  entities for JobLocation, JobComapny, JobPostActivity
+   5. JobPostActivityController: enhance for posting a new job
+   6. Integrate HTML form for popsting a new job
+5. Recruiter Dashboard
 3. Candidate Profile -> Candidate Dashboard -> Candidate Apply
